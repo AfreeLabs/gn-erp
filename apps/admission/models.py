@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.urls import reverse #Used to generate urls by reversing the URL patterns
+from django.contrib.auth.models import User
 
 from django_countries.fields import CountryField
 
@@ -89,6 +90,9 @@ class Registration(models.Model):
     def get_edit_url(self):
         return reverse('edit-registration', args=[str(self.id)])
 
+    def get_registration_process_url(self):
+        return reverse('new-admission-process', args=[str(self.id)])
+
     def __str__(self):
         return '{0} {1}'.format(self.first_name, self.last_name)
 
@@ -130,10 +134,15 @@ class Admission(models.Model):
 
 #Define Admission process, it is a prerequisite before being accepted into the universtity
 class AdmissionProcess(models.Model):
-    registree = models.ForeignKey(Registration, on_delete=models.CASCADE)
-    payment_date = models.DateField()
-    registration_fees_paid = models.DecimalField(max_digits=32, decimal_places=2)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='admission_process')
+    registree_number = models.CharField(max_length=50, editable=False)
+    registree = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name="process_registree")
+    pass_bac = models.BooleanField()
+    pass_admission_test = models.BooleanField()
+    pass_medical_test = models.BooleanField()
+    approved_by_commitee = models.BooleanField()
+    add_date = models.DateTimeField(auto_now_add=True)
+    modify_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User)
 
     # def get_absolute_url(self):
     #     """

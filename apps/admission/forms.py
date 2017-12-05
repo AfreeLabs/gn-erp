@@ -66,18 +66,22 @@ class AdmissionProcessForm(forms.ModelForm):
     class Meta:
         model = AdmissionProcess
         fields = '__all__'
+        excude = ['user']
         labels = {
+            'registree_number': 'Numero de saisie',
             'registree': 'Personne saisie',
-            'department': 'Departement',
-            'payment_date': 'Date de paiement',
-            'registration_fees_paid': "Montant de frais d'inscription payé"
+            'pass_bac': 'Baccalauréat obtenu',
+            'pass_admission_test': 'Note requise au test d\'admission obtenu',
+            'pass_medical_test': 'A passé son examen medical',
+            'approved_by_commitee': 'Apprové par la commission d\'admission'
+            ''
             }
         widgets = {
-            'registree': forms.Select(attrs={'class': 'form-control form-element'}),
-            'department': forms.Select(attrs={'class': 'form-control form-element'}),
-            'payment_date': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'16-02-2017' }),
-            'registration_fees_paid': forms.TextInput(attrs={'class': 'form-control form-element' }),
+            'registree_number': forms.TextInput(attrs={'class': 'form-control form-element'}),
+            'registree': forms.TextInput(attrs={'class': 'form-control form-element'}),
             }
+
+
 
 
 class AdmissionForm(forms.ModelForm):

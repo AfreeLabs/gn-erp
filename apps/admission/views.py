@@ -89,20 +89,29 @@ def admission_process(request):
 
 # Implement a new admission process base on each student
 @login_required
-def new_admission_process(request):
+def new_admission_process(request, id):
+    return render(request, 'core/home.html')
 
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = AdmissionProcessForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect('admission-process')
-    else:
-        form = AdmissionProcessForm()
+    # Fetch for the required Registree
+    # try:
+    #     registration = Registration.objects.get(id=id)
+    # except ActiveAcademicYear.DoestNotExists:
+    #     registration = None
+    
+    # registree = registration.id
+    # registree_number = registration.registry_number
+    # # if this is a POST request we need to process the form data
+    # if request.method == 'POST':
+    #     # create a form instance and populate it with data from the request:
+    #     form = AdmissionProcessForm(request.POST)
+    #     # check whether it's valid:
+    #     if form.is_valid():
+    #         form.save(commit=True)
+    #         return redirect('registration')
+    # else:
+    #     form = AdmissionProcessForm(initial={'registree':registree, 'registree_number':registree_number})
 
-    return render(request, 'admission/new-admission-process.html', {'form': form})
+    # return render(request, 'admission/new-admission-process.html', {'form': form})
 
 
 
