@@ -39,11 +39,9 @@
                 <span class="hide">{{ form.first_name.label_tag }}</span>
                 <div class="input-group input-group-sm" style="padding-top: 10px;" >
                 <span class="input-group-addon " id="sizing-addon3">Prenom</span>
-                {{ form.first_name}}
+                  {{ form.first_name}}
                 </div>
-                  {% for error in form.first_name.errors %}
-                  <label class="control-label">{{ error }}</label>
-                  {% endfor %}
+                  {{ form.first_name.errors}}
               </div>
 
               <div>
@@ -133,7 +131,13 @@
                   <span class="input-group-addon " id="sizing-addon3">Date de naissance</span>
                   {{form.date_of_birth}}
                 </div>
-                {{ form.date_of_birth.errors }}
+                <!-- {{ form.date_of_birth.errors }} -->
+                 {% for error in form.date_of_birth.errors %}
+                    <div class="row">
+                     <div class="alert alert-danger">{{error}}</div>
+                   </div>
+                  <!-- <label class="control-label">{{ error }}</label> -->
+                  {% endfor %}
               </div>
 
               <div>

@@ -3,6 +3,10 @@ from django import forms
 from .models import Registration, Admission, AdmissionProcess
 
 class RegistrationForm(forms.ModelForm):
+
+    error_css_class = 'error'
+    required_css_class = 'required'
+
     class Meta:
         model = Registration
         fields = '__all__'
@@ -29,7 +33,7 @@ class RegistrationForm(forms.ModelForm):
             'image': 'Choisir une image'
         }
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', }),
+            'first_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'gender': forms.Select(attrs={'class': 'form-control form-element'}),
             'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'16-02-2017'}),
@@ -53,7 +57,9 @@ class RegistrationForm(forms.ModelForm):
             'course': forms.Select(attrs={'class': 'form-control form-element'}),
             'course_level': forms.Select(attrs={'class': 'form-control form-element'}),
         }
-  
+
+
+    
      
 
 class AdmissionProcessForm(forms.ModelForm):

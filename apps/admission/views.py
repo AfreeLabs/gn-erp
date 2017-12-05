@@ -24,7 +24,13 @@ def registration(request):
 # implementing Registration form
 @login_required
 def new_registration(request):
-    active_year = ActiveAcademicYear.objects.get(id=1)
+
+    # Checking for the existence of the active year. Useful for new database
+    try:
+       active_year = ActiveAcademicYear.objects.last().academic_year.label
+    except ActiveAcademicYear.DoestNotExists:
+        active_year = None
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -45,10 +51,10 @@ def registration_detail(request, registration_id):
     registration = Registration.objects.get(id=registration_id)
     return render(request, 'admission/registration-detail.html', {'registration': registration})
 
+# Update Registree profile
 @login_required
 def edit_registration(request, registration_id):
     registration = Registration.objects.get(id=registration_id)
-
     if request.POST:
         form = RegistrationForm(data=request.POST, files=request.FILES, instance=registration)
         if form.is_valid():
@@ -81,9 +87,10 @@ def admission_process(request):
     return render(request, 'admission/admission-process.html', {'adprocess': adprocess})
 
 
-
+# Implement a new admission process base on each student
 @login_required
 def new_admission_process(request):
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -96,9 +103,6 @@ def new_admission_process(request):
         form = AdmissionProcessForm()
 
     return render(request, 'admission/new-admission-process.html', {'form': form})
-
-
-
 
 
 
