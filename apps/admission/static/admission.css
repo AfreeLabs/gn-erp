@@ -92,6 +92,13 @@ form button{
 	margin-left: 2%;
 }
 
+.modal-footer button,
+.admission-process-buttons button{
+	width: 20%;
+	margin-left: 2%;
+}
+
+
 
 
 /* REGISTRATION DETAIL PAGE */
@@ -147,5 +154,44 @@ form button{
 	margin-right: 1px;
 }
 
+#bootstrap-overrides .checkbox-input{
+	margin-left: 10%;
+	-ms-transform: scale(1.5); /* IE */
+	-moz-transform: scale(1.5); /* FF */
+	-webkit-transform: scale(1.5); /* Safari and Chrome */
+	-o-transform: scale(1.5); /* Opera */
+	padding: 10px;
+	margin-top: 6px;
+}
 
-/*BUTTON*/
+/*Customize the first checkbox of admission process form*/
+#bootstrap-overrides .bac-checkbox{
+	margin-left: 28%;
+}
+
+/*Comment form on admission proces form*/
+
+#bootstrap-overrides .admis-process-comment{
+    height: 100px;
+}
+
+#admission-process-comment{
+	margin-left: 14px;
+	width: 97%;
+}
+
+
+/*input:invalid {
+    border-color: red;
+}*/
+
+/**/
+
+/*input[type='checkbox']:required,
+input:required,
+textarea:required {
+  border-color: red !important;
+}
+input:required + label {
+  color: red;
+}*/

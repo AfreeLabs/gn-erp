@@ -21,3 +21,5 @@ RUN pip install --quiet -r requirements.txt
 COPY . /code/
 
 ENTRYPOINT ["/code/entrypoint.sh"]
+
+

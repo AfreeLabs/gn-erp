@@ -1,8 +1,13 @@
 from django import forms
+from django.core.exceptions import NON_FIELD_ERRORS
 
 from .models import Registration, Admission, AdmissionProcess
 
 class RegistrationForm(forms.ModelForm):
+
+    error_css_class = 'error'
+    required_css_class = 'required'
+
     class Meta:
         model = Registration
         fields = '__all__'
@@ -29,7 +34,7 @@ class RegistrationForm(forms.ModelForm):
             'image': 'Choisir une image'
         }
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', }),
+            'first_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'gender': forms.Select(attrs={'class': 'form-control form-element'}),
             'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'16-02-2017'}),
@@ -53,25 +58,47 @@ class RegistrationForm(forms.ModelForm):
             'course': forms.Select(attrs={'class': 'form-control form-element'}),
             'course_level': forms.Select(attrs={'class': 'form-control form-element'}),
         }
-  
+
+
+    
      
 
 class AdmissionProcessForm(forms.ModelForm):
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control admis-process-comment'}))
     class Meta:
         model = AdmissionProcess
+        # error_messages = {
+        #     NON_FIELD_ERRORS: {
+        #         'pass_bac': "Not are not unique.",
+        #     }
+        # }
         fields = '__all__'
+        exclude = ['user']
         labels = {
-            'registree': 'Personne saisie',
-            'department': 'Departement',
-            'payment_date': 'Date de paiement',
-            'registration_fees_paid': "Montant de frais d'inscription payé"
+            'registree_number': 'Numero de saisie',
+            'registree_name': 'Personne saisie',
+            'pass_bac': 'Baccalauréat obtenu',
+            'pass_admission_test': 'Note requise au test d\'admission obtenu',
+            'pass_medical_test': 'A passé son examen medical',
+            'approved_by_commitee': 'Apprové par la commission d\'admission',
+            'comment': 'Ajouter un commentaire'
             }
         widgets = {
-            'registree': forms.Select(attrs={'class': 'form-control form-element'}),
-            'department': forms.Select(attrs={'class': 'form-control form-element'}),
-            'payment_date': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'16-02-2017' }),
-            'registration_fees_paid': forms.TextInput(attrs={'class': 'form-control form-element' }),
+            'registree': forms.TextInput(),#attrs={'class':'hide'}),
+            'registree_number': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
+            'registree_name': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
+            'pass_bac': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input bac-checkbox',
+                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'pass_admission_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'pass_medical_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
             }
+
+
 
 
 class AdmissionForm(forms.ModelForm):
