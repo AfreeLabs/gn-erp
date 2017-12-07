@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError
+from django.views.generic.edit import UpdateView
 
 from apps.school.models import ActiveAcademicYear
 from .models import Registration, Admission, AdmissionProcess
@@ -18,9 +19,11 @@ def home_admission(request):
 @login_required
 def registration(request):
 
+    admissionProcess = AdmissionProcess.objects.all()
     registrations = Registration.objects.all()
+    context =  {'registrations':registrations}
     
-    return render(request, 'admission/registration.html', {'registrations':registrations})
+    return render(request, 'admission/registration.html', context)
 
 # implementing Registration form
 @login_required
@@ -177,3 +180,4 @@ def admission_detail(request, admission_id):
 #         context ={'registration': registration}
 #         data['html_form'] = render_to_string('admission/partial-registration-delete.html', context, request=request)
 #         return JsonResponse(data)
+

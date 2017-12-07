@@ -76,9 +76,16 @@
                                 </a>
                             </li>
                             <li>
+                                 {% if registration.process_registree.id %}
+                                 <a href="" class="hide">
+                                    Processus d'admission
+                                </a>
+
+                                 {% else %}
                                 <a href="{{ registration.get_registration_process_url }}" class="">
                                     Processus d'admission
                                 </a>
+                                {% endif %}
                             </li>
                            
                         </ul>
@@ -86,7 +93,11 @@
                 </td>
                 <td>{{registration.first_name}}</td>
                 <td>{{registration.last_name}}</td>
+                {% if registration.process_registree.id %}
+                  <td class="registree-status"> Admis</td>
+                {% else %}
                 <td class="registree-status"> Nouveau</td>
+                {% endif %}
 
             </tr>
             {% endfor %}

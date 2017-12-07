@@ -1,5 +1,7 @@
 from django import forms
 from django.core.exceptions import NON_FIELD_ERRORS
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 
 from .models import Registration, Admission, AdmissionProcess
 
@@ -37,7 +39,7 @@ class RegistrationForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'gender': forms.Select(attrs={'class': 'form-control form-element'}),
-            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'16-02-2017'}),
+            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'veuillez entre un data au format 16-02-2017'}),
             'nationality': forms.Select(attrs={'class': 'form-control form-element'}),
             'fathers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'mothers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
@@ -97,6 +99,7 @@ class AdmissionProcessForm(forms.ModelForm):
             'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
             }
+
 
 
 
