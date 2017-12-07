@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.school.apps.SchoolConfig',
     'apps.students.apps.StudentsConfig',
     'apps.core',
+     'rolepermissions',
     # 'apps.humans_ressources.apps.HumansRessourcesConfig',
 ]
 
@@ -152,4 +153,4 @@ DATE_INPUT_FORMATS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+ROLEPERMISSIONS_MODULE = 'config.roles'
