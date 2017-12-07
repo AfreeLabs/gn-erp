@@ -91,7 +91,7 @@ class Registration(models.Model):
         return reverse('edit-registration', args=[str(self.id)])
 
     def get_registration_process_url(self):
-        return reverse('new-admission-process', args=[str(self.id)])
+        return reverse('new-process', args=[str(self.id)])
 
     def __str__(self):
         return '{0} {1}'.format(self.first_name, self.last_name)
@@ -134,11 +134,13 @@ class Admission(models.Model):
 
 #Define Admission process, it is a prerequisite before being accepted into the universtity
 class AdmissionProcess(models.Model):
-    registree_number = models.CharField(max_length=50, editable=False)
     registree = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name="process_registree")
+    registree_number = models.CharField(max_length=50)
+    registree_name = models.CharField(max_length=50)
     pass_bac = models.BooleanField()
     pass_admission_test = models.BooleanField()
     pass_medical_test = models.BooleanField()
+    comment = models.TextField(max_length=1000, null=True, blank=True)
     approved_by_commitee = models.BooleanField()
     add_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)

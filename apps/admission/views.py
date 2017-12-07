@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.core.exceptions import ValidationError
 
 from apps.school.models import ActiveAcademicYear
 from .models import Registration, Admission, AdmissionProcess
@@ -45,7 +46,7 @@ def new_registration(request):
     return render(request, 'admission/new-registration.html', {'form': form})
 
 
-# implementing Registration detai page
+# implementing Registration detail page
 @login_required
 def registration_detail(request, registration_id):
     registration = Registration.objects.get(id=registration_id)
@@ -66,6 +67,7 @@ def edit_registration(request, registration_id):
     return render(request, 'admission/edit-registration.html', {'form': form, 'registration': registration})
 
 
+#Delete Regitstree
 @login_required
 def delete_registration(request, pk):
     data = dict()
@@ -87,31 +89,50 @@ def admission_process(request):
     return render(request, 'admission/admission-process.html', {'adprocess': adprocess})
 
 
-# Implement a new admission process base on each student
 @login_required
 def new_admission_process(request, id):
-    return render(request, 'core/home.html')
-
-    # Fetch for the required Registree
-    # try:
-    #     registration = Registration.objects.get(id=id)
-    # except ActiveAcademicYear.DoestNotExists:
-    #     registration = None
+    #Fetch for the required Registree
+    try:
+        registration = Registration.objects.get(id=id)
+    except ActiveAcademicYear.DoestNotExists:
+        registration = None
     
-    # registree = registration.id
-    # registree_number = registration.registry_number
-    # # if this is a POST request we need to process the form data
-    # if request.method == 'POST':
-    #     # create a form instance and populate it with data from the request:
-    #     form = AdmissionProcessForm(request.POST)
-    #     # check whether it's valid:
-    #     if form.is_valid():
-    #         form.save(commit=True)
-    #         return redirect('registration')
-    # else:
-    #     form = AdmissionProcessForm(initial={'registree':registree, 'registree_number':registree_number})
+    registree = registration.id
+    registree_number = registration.registry_number
+    registree_name = registration
 
-    # return render(request, 'admission/new-admission-process.html', {'form': form})
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = AdmissionProcessForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            process = form.save(commit=False)
+            process.user = request.user
+            form.save()
+            return redirect('registration')
+    else:
+        form = AdmissionProcessForm(initial={'registree_name':registree_name, 'registree_number':registree_number,
+                                                'registree': registree})
+    context = {'form': form, 'registree': registree, 'registree_number': registree_number,
+                'registree_name':registree_name, 'registration': registration}
+    return render(request, 'admission/new-process.html', context)
+
+# Implement a new admission process
+# @login_required
+# def something(request):
+#     # if this is a POST request we need to process the form data
+#     if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+#         form = AdmissionProcessForm(request.POST)
+#         # check whether it's valid:
+#         if form.is_valid():
+#             form.save(commit=True)
+#             return redirect('admission-process')
+#     else:
+#         form = AdmissionProcessForm()
+
+#     return render(request, 'admission/new-admission-process.html', {'form': form})
 
 
 
@@ -141,6 +162,7 @@ def new_admission(request):
 def admission_detail(request, admission_id):
     admission = Admission.objects.get(id=admission_id)
     return render(request, 'admission/admission-detail.html', {'admission': admission})
+
 
 
 

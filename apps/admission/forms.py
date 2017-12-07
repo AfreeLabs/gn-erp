@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import NON_FIELD_ERRORS
 
 from .models import Registration, Admission, AdmissionProcess
 
@@ -63,22 +64,38 @@ class RegistrationForm(forms.ModelForm):
      
 
 class AdmissionProcessForm(forms.ModelForm):
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control admis-process-comment'}))
     class Meta:
         model = AdmissionProcess
+        # error_messages = {
+        #     NON_FIELD_ERRORS: {
+        #         'pass_bac': "Not are not unique.",
+        #     }
+        # }
         fields = '__all__'
-        excude = ['user']
+        exclude = ['user']
         labels = {
             'registree_number': 'Numero de saisie',
-            'registree': 'Personne saisie',
+            'registree_name': 'Personne saisie',
             'pass_bac': 'Baccalauréat obtenu',
             'pass_admission_test': 'Note requise au test d\'admission obtenu',
             'pass_medical_test': 'A passé son examen medical',
-            'approved_by_commitee': 'Apprové par la commission d\'admission'
-            ''
+            'approved_by_commitee': 'Apprové par la commission d\'admission',
+            'comment': 'Ajouter un commentaire'
             }
         widgets = {
-            'registree_number': forms.TextInput(attrs={'class': 'form-control form-element'}),
-            'registree': forms.TextInput(attrs={'class': 'form-control form-element'}),
+            'registree': forms.TextInput(),#attrs={'class':'hide'}),
+            'registree_number': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
+            'registree_name': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
+            'pass_bac': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input bac-checkbox',
+                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'pass_admission_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'pass_medical_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
             }
 
 
