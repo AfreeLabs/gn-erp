@@ -114,24 +114,6 @@ def student_number():
         return(prefix % (current_year, current_id))
 
 
-#Define Admission model
-class Admission(models.Model):
-    registry = models.OneToOneField(Registration, on_delete=models.CASCADE)
-    # fees = models.IntegerField()
-    matricule = models.CharField(max_length=18, default=student_number, unique=True, editable=False)
-    admission_add_date = models.DateTimeField(auto_now_add=True)
-    admission_modify_date = models.DateTimeField(auto_now=True)
-    
-    def get_absolute_url(self):
-        """
-        Returns the url to access a particular registration instance.
-        """
-        return reverse('admission-detail', args=[str(self.id)])
-
-    def __str__(self):
-        return '{0}'.format(self.registry)
-
-
 #Define Admission process, it is a prerequisite before being accepted into the universtity
 class AdmissionProcess(models.Model):
     registree = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name="process_registree")
@@ -142,6 +124,8 @@ class AdmissionProcess(models.Model):
     pass_medical_test = models.BooleanField()
     comment = models.TextField(max_length=1000, null=True, blank=True)
     approved_by_commitee = models.BooleanField()
+    admission_denied = models.BooleanField()
+    admission_denied_date = models.DateTimeField(auto_now_add=True)
     add_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
@@ -156,7 +140,24 @@ class AdmissionProcess(models.Model):
         return(self.registree.registry_number)
 
 
+#Define Inscription model
+class Inscription(models.Model):
+    registry = models.OneToOneField(AdmissionProcess, on_delete=models.CASCADE)
+    # fees = models.IntegerField()
+    matricule = models.CharField(max_length=18, default=student_number, unique=True, editable=False)
+    admission_add_date = models.DateTimeField(auto_now_add=True)
+    admission_modify_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User)
 
+    
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular registration instance.
+        """
+        return reverse('admission-detail', args=[str(self.id)])
+
+    def __str__(self):
+        return '{0}'.format(self.registry)
 
 # @receiver(pre_save, sender=Registration)
 # def generate_student_card(sender, instance, *args, **kwargs):

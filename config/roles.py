@@ -11,7 +11,3 @@ class AssistantAdmissionService(AbstractUserRole):
         'Enter_registrations': True,
     }
 
-class Doctor(AbstractUserRole):
-    available_permissions = {
-        'create_medical_record': True,
-    }

@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 from django.views.generic.edit import UpdateView
 
 from apps.school.models import ActiveAcademicYear
-from .models import Registration, Admission, AdmissionProcess
-from .forms import RegistrationForm, AdmissionForm, AdmissionProcessForm
+from .models import Registration, Inscription, AdmissionProcess
+from .forms import RegistrationForm, InscriptionForm, AdmissionProcessForm
 
 # Create your views here.
 @login_required
@@ -141,8 +141,8 @@ def new_admission_process(request, id):
 
 @login_required
 def admission(request):
-    admissions = Admission.objects.all()
-    return render(request, 'admission/admission.html', {'admissions': admissions})
+    inscriptions = Inscription.objects.all()
+    return render(request, 'admission/admission.html', {'inscriptions': inscriptions})
 
 
 @login_required

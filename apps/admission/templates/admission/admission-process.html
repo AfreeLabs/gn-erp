@@ -1,6 +1,9 @@
-{% extends 'core/base.html' %}
+{% include 'core/base.html' %}
 {% load static %}
+{% load admission_tags %}
 {% load permission_tags %}
+
+{% load humanize %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'admission.css' %}">
@@ -8,42 +11,41 @@
 
 {% block content %}
 
-<div class="row container registration-page">
+
+<div class="row admission-process registration-page">
      {% include 'admission/aside.html' %}
 
     <div class="col-md-10">
         <div class="page-header">
             <ol class="breadcrumb">
             <li><a href="#">Admission</a></li>
-            <li class="active">Liste des Saisies</li>
+            <li class="active">Liste des Admis</li>
             </ol>
             <div class="row">
-            <div class="col-md-8">
-                <a class="btn btn-primary btn-sm" href="{% url 'register' %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Ajouter</a>
-            </div>
+            <!-- <div class="col-md-8">
+                <a class="btn btn-primary btn-sm" href=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Ajouter</a>
+            </div> -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
                 <!-- <input type="text" class="form-control" aria-label="..."> -->
                 <input type="text" class="form-control" aria-label="..." >
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right">
+                    <!-- <ul class="dropdown-menu dropdown-menu-right">
                     <li><input type="checkbox" aria-label="...">&nbsp;Date</li>
-                    <li><input type="checkbox" aria-label="...">&nbsp;Numero de saisie</li>
-                    <li><input type="checkbox" aria-label="...">&nbsp;Prenom</li>
-                    <li><input type="checkbox" aria-label="...">&nbsp;Nom</li>
+                    <li><input type="checkbox" aria-label="...">&nbsp;Personne</li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div><!-- /btn-group -->
-                </div><!-- /input-group -->  
+                    </ul> -->
+                </div>
+                </div>
             </div>
             </div>
         
         </div>
         <div class="panel panel-primary">
             <!-- Default panel contents -->
-            <div class="panel-heading">Liste des personnes saisies
+            <div class="panel-heading">Liste des admis
             </div>
             <div class="panel-body">
             <p>...</p>
@@ -55,27 +57,30 @@
                 <tr>
                 <!-- <th><input class="form-check-input" type="checkbox" value=""></th> -->
                 <th scope="col">N<sup>o</sup></th>
-                <th>DATE</th>
-                <th>Numero de saisie</th>
-                <th>Prenom</th>
-                <th>Nom</th>
+                <th>Date d'admission</th>
+                <th>Nom de la personne saisie</th>
+                <th>Numero de la personne saisie</th>
+                <th>Formation choisie</th>
+                <th>Programme choisie</th>
                 <th>Statut</th>
+        
              </tr>
             </thead>
             <tbody>
-            {% for registration in registrations %}
+                {% for process in adprocess %}
             <tr>
                 <td scope="row">{{forloop.counter}}</td>
-                <td>{{registration.registration_add_date|date:"DATE_FORMAT" }}</td>
+                <td>{{process.add_date|date:"DATE_FORMAT" }}</td>
+                <td>{{process.registree}}</td>
                 <td class="dropdown">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true" id="registrationMenu">{{registration.registry_number}}
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true" id="registrationMenu">{{process.registree.registry_number}}
                     </a>
                         <ul class="dropdown-menu registration-menu" aria-labelledby="registrationMenu" id="regist-menu">
-                            <li>
-                                <a href="{{ registration.get_absolute_url }}" class="">
+                            <!-- <li>
+                                <a href="" class="">
                                     Plus d'infos sur {{registration.first_name}} {{registration.last_name}}
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                  {% if registration.process_registree.id %}
                                  <a href="" class="hide">
@@ -85,7 +90,7 @@
                                  {% else %}
                                   {% if user|has_role:'head_admission_service' %}
                                 <a href="{{ registration.get_registration_process_url }}" class="">
-                                    Processus d'admission
+                                    Processus d'Inscription administrative
                                 </a>
                                    {% else %}
                                 <a class="" style="background-color: #e3e3e3; color: black;">
@@ -98,13 +103,11 @@
                         </ul>
                     
                 </td>
-                <td>{{registration.first_name}}</td>
-                <td>{{registration.last_name}}</td>
-                {% if registration.process_registree.id %}
-                  <td class="registree-status"> Admis</td>
-                {% else %}
-                <td class="registree-status"> Nouveau</td>
-                {% endif %}
+                <td>{{ process.registree.course}}</td>
+                <td>{{ process.registree.course_level}}</td>
+                <td class="">Nouveau</td> 
+                  
+
 
             </tr>
             {% endfor %}
@@ -117,7 +120,8 @@
         
         </div>
         
-    
+        <!-- Modal -->
+       
     </div>
 </div>
 

@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load permission_tags %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'admission.css' %}">
@@ -26,7 +27,7 @@
       {% endfor %}
     {% endif %}
 
-    <form action="{% url 'new-process' registration.id %}" method="POST" class="admission-process-form">
+    <form action="{% url 'new-process' registration.id %}" method="POST" id="admission-process-form">
       {% csrf_token %}
 
       <!-- {{ form.as_p}} -->
@@ -146,6 +147,20 @@
                   <!-- <label class="control-label">{{ error }}</label> -->
                   {% endfor %}
               </div>
+              <div class="">
+                <span class="hide">{{ form.admission_denied.label_tag }}</span>
+                <div class="input-group input-group-sm" style="padding-top: 10px;" >
+                  <span class="input-group-addon " >Admission non approuvée par la commission</span>
+                  {{form.admission_denied}}
+                </div>
+                <!-- {{ form.date_of_birth.errors }} -->
+                 {% for error in form.admission_denied.errors %}
+                    <div class="row">
+                     <div class="alert alert-danger alert-form-error">{{error}}</div>
+                   </div>
+                  <!-- <label class="control-label">{{ error }}</label> -->
+                  {% endfor %}
+              </div>
             </div>
         </div>
         <div class="row">
@@ -169,7 +184,7 @@
       </div>
     </div>
         <div class="admission-process-buttons"> 
-        <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Admission Acceptée</button>
+        <button class="btn btn-primary btn-sm" id="new-process-submit-button" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Admission Acceptée</button>
         <!-- <button type="button" class="btn btn-default" href="/home/">Annulé l'Operation</button> -->
 
        <p></p>
@@ -180,4 +195,7 @@
       </form>
     </div>
   </div>
+{% endblock %}
+{% block bottom %}
+  <script src="{% static 'admission.js' %}"></script>
 {% endblock %}

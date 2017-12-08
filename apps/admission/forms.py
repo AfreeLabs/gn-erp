@@ -3,7 +3,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 
-from .models import Registration, Admission, AdmissionProcess
+from .models import Registration, Inscription, AdmissionProcess
 
 class RegistrationForm(forms.ModelForm):
 
@@ -39,7 +39,7 @@ class RegistrationForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'gender': forms.Select(attrs={'class': 'form-control form-element'}),
-            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'veuillez entre un data au format 16-02-2017'}),
+            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'veuillez entre une date au format 16-02-2017'}),
             'nationality': forms.Select(attrs={'class': 'form-control form-element'}),
             'fathers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'mothers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
@@ -84,29 +84,31 @@ class AdmissionProcessForm(forms.ModelForm):
             'pass_admission_test': 'Note requise au test d\'admission obtenu',
             'pass_medical_test': 'A passé son examen medical',
             'approved_by_commitee': 'Apprové par la commission d\'admission',
-            'comment': 'Ajouter un commentaire'
+            'comment': 'Ajouter un commentaire',
+            'admission_denied': 'Admission non approuvée'
             }
         widgets = {
             'registree': forms.TextInput(),#attrs={'class':'hide'}),
             'registree_number': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
             'registree_name': forms.TextInput(attrs={'class': 'form-control form-element', 'readonly':'readonly'}),
-            'pass_bac': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input bac-checkbox',
+            'pass_bac': forms.CheckboxInput(attrs={'class':'checkbox-input bac-checkbox',
                          "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
-            'pass_admission_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+            'pass_admission_test': forms.CheckboxInput(attrs={ 'class':'checkbox-input',
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
-            'pass_medical_test': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+            'pass_medical_test': forms.CheckboxInput(attrs={'class':'checkbox-input',
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
             'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            'admission_denied': forms.CheckboxInput(attrs={'class':'checkbox-input'}),
             }
 
 
 
 
 
-class AdmissionForm(forms.ModelForm):
+class InscriptionForm(forms.ModelForm):
     class Meta:
-        model = Admission
+        model = Inscription
         fields ='__all__'
         widgets = {
             'registree': forms.Select(attrs={'class': 'form-control form-element'}),

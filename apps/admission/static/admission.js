@@ -40,8 +40,40 @@ jQuery(document).ready(function(){
   $(".btn-delete").on("click", loadForm);
   $(".js-delete-registration-form").on("submit", saveForm);
 
+  // Disabling Admission process form submit button until the first select box are filled
+  // $("#id_pass_admission_test", "#id_pass_bac", 
+  //   "#id_pass_medical_test", "#id_approved_by_commitee").on
 
+  var checked = $("#id_pass_admission_test");
+  checked.on('click', function(){
+        alert("cool")
+        // var empty = false;
+        // if (checked.is('checked')){
+        //   empty = true
+        //   alert("true");
+        // }
+
+    
+  }
+  });
+        if (empty){
+      $('#new-process-submit-button').attr('disabled', false);
+    }else{
+      $('#new-process-submit-button').attr('disabled', true);
+
+  //  checked.each(function(element){
+  //   if (element.is('checked')){
+  //   $('#new-process-submit-button').show();
+  //   }else{
+  //    $('#new-process-submit-button').attr('disabled', 'disabled');
+  // }
+
+  //  });
+
+  
+
+
+  
 });
-
 
 
