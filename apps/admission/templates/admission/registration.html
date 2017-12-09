@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load permission_tags %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'admission.css' %}">
@@ -76,9 +77,22 @@
                                 </a>
                             </li>
                             <li>
+                                 {% if registration.process_registree.id %}
+                                 <a href="" class="hide">
+                                    Processus d'admission
+                                </a>
+
+                                 {% else %}
+                                  {% if user|has_role:'head_admission_service' %}
                                 <a href="{{ registration.get_registration_process_url }}" class="">
                                     Processus d'admission
                                 </a>
+                                   {% else %}
+                                <a class="" style="background-color: #e3e3e3; color: black;">
+                                    Processus d'admission
+                                </a>
+                                {% endif %}
+                                {% endif %}
                             </li>
                            
                         </ul>
@@ -86,7 +100,17 @@
                 </td>
                 <td>{{registration.first_name}}</td>
                 <td>{{registration.last_name}}</td>
-                <td class="registree-status"> Nouveau</td>
+                {% if registration.process_registree.commitee_decision == 'approuvé' %}
+                  <td class="registree-status"> Admis</td>
+                {% elif registration.process_registree.commitee_decision == 'approved' %}
+                  <td class="registree-status"> Admis</td>
+                {% elif registration.process_registree.commitee_decision == 'Rejeté' %}
+                  <td class="registree-status"> Rejeté</td>
+                {% elif registration.process_registree.commitee_decision == 'rejeté' %}
+                  <td class="registree-status"> Rejeté</td>
+                {% else %}
+                  <td class="registree-status"> Nouveau</td>
+                {% endif %}
 
             </tr>
             {% endfor %}
