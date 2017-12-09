@@ -65,7 +65,7 @@
 
               <div>
                 <span class="hide">{{ form.gender.label_tag }}</span>
-                <div class="input-group input-group-sm" style="padding-top: 10px;" >
+                <div class="" style="padding-top: 10px;" >
                   <span class="input-group-addon " id="sizing-addon3">Genre</span>
                   {{ form.gender }}
                 </div>
@@ -270,7 +270,7 @@
               </div>
               <div>
                 <span class="hide">{{ form.option.label_tag }}</span>
-                <div class="input-group input-group-sm" style="padding-top: 10px;" >
+                <div id="options" style="padding-top: 10px;" >
                   <span class="input-group-addon " id="sizing-addon3">Options</span>
                   {{ form.option}}
                 </div>
@@ -381,6 +381,9 @@
       </form>
     </div>
   </div>
+{% endblock %}
+{% block bottom %}
+  <script src="{% static 'admission.js' %}"></script>
 {% endblock %}
 
 

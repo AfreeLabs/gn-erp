@@ -6,10 +6,17 @@ from django.contrib.auth.hashers import check_password
 from .models import Registration, Inscription, AdmissionProcess
 
 class RegistrationForm(forms.ModelForm):
-
-    error_css_class = 'error'
-    required_css_class = 'required'
-
+    GENDERS =(
+        ('homme', 'Homme'),
+        ('femme', 'Femme')
+        )
+    OPTIONS = (
+        ('mathématique', 'Mathématiques'),
+        ('experimentale', 'Experimentales'),
+        ('sociale', 'Sociales'),
+    )
+    gender = forms.ChoiceField(choices=GENDERS, widget=forms.RadioSelect())
+    option = forms.ChoiceField(choices=OPTIONS, widget=forms.RadioSelect())
     class Meta:
         model = Registration
         fields = '__all__'
@@ -38,8 +45,8 @@ class RegistrationForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-element' }),
-            'gender': forms.Select(attrs={'class': 'form-control form-element'}),
-            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element', 'placeholder':'veuillez entre une date au format 16-02-2017'}),
+            # 'gender': forms.Select(attrs={'class': 'form-control form-element'}),
+            'date_of_birth': forms.DateInput(attrs={'class': 'form-control form-element','id':'datepicker'}), #'placeholder':'veuillez entre une date au format 16-02-2017',
             'nationality': forms.Select(attrs={'class': 'form-control form-element'}),
             'fathers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'mothers_name': forms.TextInput(attrs={'class': 'form-control form-element'}),
@@ -52,7 +59,7 @@ class RegistrationForm(forms.ModelForm):
             'guardian_email': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'guardian_address': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'school_origin': forms.TextInput(attrs={'class': 'form-control form-element'}),
-            'option': forms.Select(attrs={'class': 'form-control form-element'}),
+            # 'option': forms.Select(attrs={'class': 'form-control form-element'}),
             'year_admission_bac': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'pv': forms.TextInput(attrs={'class': 'form-control form-element'}),
             'image': forms.FileInput(attrs={"accept":".jpg, .jpeg, .png"}),

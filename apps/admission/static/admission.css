@@ -184,8 +184,18 @@ form button{
 
 /*Commitee decison field(radio buttons) admssion process*/
 #id_commitee_decision li{
-    display: inline-block;
+   display: inline-block;
 }
+/*Gender radio buttons id Generate by django*/
+#id_gender li{
+	display: inline;
+	margin-left: 50px;
+}
+/*OPTIIONS RADIO BUTTONS*/
+#id_option li{
+	display: inline;
+}
+
 
 /*Inscription submit button*/
 #inscription-button{
