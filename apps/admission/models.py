@@ -42,9 +42,9 @@ class Registration(models.Model):
     )
 
     OPTION_CHOICE = (
-        ('sm', 'Sciences Mathématiques'),
-        ('se', 'Sciences Experimentales'),
-        ('ss', 'Sciences Sociales'),
+        ('mathématique', 'Mathématiques'),
+        ('experimentale', 'Experimentales'),
+        ('sociale', 'Sociales'),
     )
 
     registry_number = models.CharField(max_length=18, default=registration_number, unique=True, editable=False)
