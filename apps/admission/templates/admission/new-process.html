@@ -134,27 +134,13 @@
             </div>
             <div class="col-md-6">
                <div class="">
-                <span class="hide">{{ form.approved_by_commitee.label_tag }}</span>
-                <div class="input-group input-group-sm" style="padding-top: 10px;" >
-                  <span class="input-group-addon " >Apprové par la commission d'admission</span>
-                  {{form.approved_by_commitee}}
+                <span class="hide">{{ form.commitee_decision.label_tag }}</span>
+                <div class="" style="padding-top: 10px;" >
+                  <span class="input-group-addon " >Decision de la commission d'admission</span>
+                  {{form.commitee_decision}}
                 </div>
                 <!-- {{ form.date_of_birth.errors }} -->
-                 {% for error in form.approved_by_commitee.errors %}
-                    <div class="row">
-                     <div class="alert alert-danger alert-form-error">{{error}}</div>
-                   </div>
-                  <!-- <label class="control-label">{{ error }}</label> -->
-                  {% endfor %}
-              </div>
-              <div class="">
-                <span class="hide">{{ form.admission_denied.label_tag }}</span>
-                <div class="input-group input-group-sm" style="padding-top: 10px;" >
-                  <span class="input-group-addon " >Admission non approuvée par la commission</span>
-                  {{form.admission_denied}}
-                </div>
-                <!-- {{ form.date_of_birth.errors }} -->
-                 {% for error in form.admission_denied.errors %}
+                 {% for error in form.commitee_decision.errors %}
                     <div class="row">
                      <div class="alert alert-danger alert-form-error">{{error}}</div>
                    </div>
@@ -162,7 +148,6 @@
                   {% endfor %}
               </div>
             </div>
-        </div>
         <div class="row">
           <div class=""></div>
           <div class="">
@@ -184,7 +169,7 @@
       </div>
     </div>
         <div class="admission-process-buttons"> 
-        <button class="btn btn-primary btn-sm" id="new-process-submit-button" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Admission Acceptée</button>
+        <button class="btn btn-primary btn-sm" id="new-process-submit-button" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Inscrire</button>
         <!-- <button type="button" class="btn btn-default" href="/home/">Annulé l'Operation</button> -->
 
        <p></p>

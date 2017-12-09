@@ -100,10 +100,16 @@
                 </td>
                 <td>{{registration.first_name}}</td>
                 <td>{{registration.last_name}}</td>
-                {% if registration.process_registree.id %}
+                {% if registration.process_registree.commitee_decision == 'approuvé' %}
                   <td class="registree-status"> Admis</td>
+                {% elif registration.process_registree.commitee_decision == 'approved' %}
+                  <td class="registree-status"> Admis</td>
+                {% elif registration.process_registree.commitee_decision == 'Rejeté' %}
+                  <td class="registree-status"> Rejeté</td>
+                {% elif registration.process_registree.commitee_decision == 'rejeté' %}
+                  <td class="registree-status"> Rejeté</td>
                 {% else %}
-                <td class="registree-status"> Nouveau</td>
+                  <td class="registree-status"> Nouveau</td>
                 {% endif %}
 
             </tr>

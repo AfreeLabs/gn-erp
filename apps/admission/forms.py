@@ -66,8 +66,10 @@ class RegistrationForm(forms.ModelForm):
      
 
 class AdmissionProcessForm(forms.ModelForm):
-    comment = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control admis-process-comment'}))
+    CHOICES =(
+        ('approuvé', 'Approuvé'),
+        ('rejeté', 'Rejeté'))
+    commitee_decision = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
     class Meta:
         model = AdmissionProcess
         # error_messages = {
@@ -83,9 +85,8 @@ class AdmissionProcessForm(forms.ModelForm):
             'pass_bac': 'Baccalauréat obtenu',
             'pass_admission_test': 'Note requise au test d\'admission obtenu',
             'pass_medical_test': 'A passé son examen medical',
-            'approved_by_commitee': 'Apprové par la commission d\'admission',
+            'commitee_decision': 'Decision du comité d\'admission',
             'comment': 'Ajouter un commentaire',
-            'admission_denied': 'Admission non approuvée'
             }
         widgets = {
             'registree': forms.TextInput(),#attrs={'class':'hide'}),
@@ -97,9 +98,11 @@ class AdmissionProcessForm(forms.ModelForm):
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
             'pass_medical_test': forms.CheckboxInput(attrs={'class':'checkbox-input',
                         "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
-            'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
-                        "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
-            'admission_denied': forms.CheckboxInput(attrs={'class':'checkbox-input'}),
+            # 'commitee_decision': forms.RadioSelect(),
+            'comment':forms.Textarea(attrs={'class': 'form-control admis-process-comment', 'required':False})
+            # 'approved_by_commitee': forms.CheckboxInput(attrs={'required':True, 'class':'checkbox-input',
+            #             "oninvalid":"this.setCustomValidity('Ce champ est obligatoire')", "oninput":"setCustomValidity('')"}),
+            # 'admission_denied': forms.CheckboxInput(attrs={'class':'checkbox-input'}),
             }
 
 
@@ -110,10 +113,8 @@ class InscriptionForm(forms.ModelForm):
     class Meta:
         model = Inscription
         fields ='__all__'
-        widgets = {
-            'registree': forms.Select(attrs={'class': 'form-control form-element'}),
-            'academic_year': forms.Select(attrs={'class': 'form-control form-element'}),
-            'class_level': forms.Select(attrs={'class': 'form-control form-element'}),
-        }
+        exclude = ['user']
+        widgets = {}
+        
 
 

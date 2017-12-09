@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^registration/([0-9]+)/$', views.registration_detail, name='registration-detail'),
     url(r'^registration/edit/(\d+)/$', views.edit_registration, name='edit-registration'),
     url(r'^registration/admit/(\d+)/$', views.new_admission_process, name='new-process'),
+    url(r'^registration/incription/(\d+)/$', views.new_inscription, name='new-inscription'),
     url(r'^registration/delete/([0-9]+)$', views.delete_registration, name='delete-registration'),
     # url(r'^new-admission-process/$', views.new_admission_process, name='new-admission-process'),
     url(r'^admission-process/$', views.admission_process, name='admission-process'),

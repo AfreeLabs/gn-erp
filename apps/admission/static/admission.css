@@ -169,16 +169,40 @@ form button{
 	margin-left: 28%;
 }
 
-/*Comment form on admission proces form*/
+/*Comment field on admission proces form*/
 
 #bootstrap-overrides .admis-process-comment{
     height: 100px;
+    
 }
 
 #admission-process-comment{
-	margin-left: 14px;
-	width: 97%;
+	margin-left: 30px;
+	width: 94%;
+
 }
+
+/*Commitee decison field(radio buttons) admssion process*/
+#id_commitee_decision li{
+    display: inline-block;
+}
+
+/*Inscription submit button*/
+#inscription-button{
+	margin: 10px 10px;
+	width: 200px;
+}
+
+/*Inscription Panel*/
+#inscription-panel{
+	margin-right: 20px;
+}
+
+/*#id_commitee_decision_0,
+label[for="id_commitee_decision_0"]{
+	display: none;
+}*/
+
 
 
 /*input:invalid {
