@@ -43,7 +43,7 @@ jQuery(document).ready(function(){
   
   // Adding datepicker for dates
     $( function() {
-      $( "#datepicker" ).datepicker();
+      $( "#datepicker" ).datepicker($.datepicker.regional[ "fr" ]);
     } );
   
 

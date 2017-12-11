@@ -139,14 +139,14 @@
                 <td>{{ process.registree.course}}</td>
                 <td>{{ process.registree.course_level}}</td>
                 {% if process.registree.reg_inscription.id %}
-                <td class="">Inscrit</td> 
+                <td class="ok-status">Inscrit</td> 
                 {% else %}
                 <td class="">Nouveau</td> 
                 {% endif %}
                 {% if process.registree.registration_payement.count > 0 %}
-                 <td class="">Payés</td> 
+                 <td class="ok-status">Payés</td> 
                 {% else %}
-                 <td class="">Non payés</td> 
+                 <td class="no-status">Non payés</td> 
                 {% endif %}
 
 

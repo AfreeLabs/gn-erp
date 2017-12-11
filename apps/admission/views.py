@@ -93,7 +93,7 @@ def admission_process(request):
     payements = Payement.objects.all()
     context =  {'adprocess': adprocess, 'payement': payements}
     
-    return render(request, 'admission/admission-process.html', context)
+    return render(request, 'admission/inscription.html', context)
 
 
 @login_required
@@ -123,7 +123,7 @@ def new_admission_process(request, id):
                                                 'registree': registree})
     context = {'form': form, 'registree': registree, 'registree_number': registree_number,
                 'registree_name':registree_name, 'registration': registration}
-    return render(request, 'admission/new-process.html', context)
+    return render(request, 'admission/new-admission-process.html', context)
 
 
 # Implement inscription

@@ -208,6 +208,15 @@ form button{
 	margin-right: 20px;
 }
 
+/*Styling Font colors of statuses*/
+#bootstrap-overrides .ok-status{
+	color: blue;
+}
+
+#bootstrap-overrides .no-status{
+	color: red;
+}
+
 /*#id_commitee_decision_0,
 label[for="id_commitee_decision_0"]{
 	display: none;
