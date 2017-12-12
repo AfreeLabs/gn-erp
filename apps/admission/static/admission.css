@@ -254,6 +254,36 @@ form button{
            /*STUDENT STYLES*/
 /***********************************************************/
 
+/*DATATABLE STYLING*/
+
+/*#registration-table_filter{
+	color: red;
+}
+
+#registration-table_length{
+	color: green;
+}*/
+
+#bootstrap-overrides .dataTables_length{
+	margin-top:-140px;
+}
+
+#bootstrap-overrides .dataTables_filter{
+	margin-top:-140px;
+}
+
+#bootstrap-overrides .dataTables_info{
+   margin-bottom: -70px;
+}
+
+#bootstrap-overrides .dataTables_paginate{
+   margin-bottom: -70px;
+}
+
+
+#bootstrap-overrides .panel-pages{
+	margin-top: 70px;
+}
 /*input:invalid {
     border-color: red;
 }*/
