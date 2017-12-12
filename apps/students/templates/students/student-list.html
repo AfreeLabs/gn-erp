@@ -1,0 +1,95 @@
+{% include 'core/base.html' %}
+{% load static %}
+{% load admission_tags %}
+{% load permission_tags %}
+
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'admission.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row admission-process registration-page">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+        <div class="page-header">
+            <ol class="breadcrumb">
+            <li><a href="#">Etudiants</a></li>
+            <li class="active">Liste des Etudiants</li>
+            </ol>
+        
+        </div>
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Liste des Etudiants
+            </div>
+            <div class="panel-body">
+            <p>...</p>
+            </div>
+            <!-- <button type="button" class="btn btn-primary" (click)="onCreate">Create</button> -->
+            <!-- Table -->
+            <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                <!-- <th><input class="form-check-input" type="checkbox" value=""></th> -->
+                <th scope="col">N<sup>o</sup></th>
+                <th>Date d'inscription</th>
+                <th>Nom de l'Etudiant</th>
+                <th>Matricule de l'Etudiant</th>
+                <th>Formation choisie</th>
+                <th>Programme choisie</th>
+             </tr>
+            </thead>
+            <tbody>
+                {% for inscription in inscriptions %}
+            <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td>{{inscription.inscription_add_date|date:"DATE_FORMAT" }}</td>
+                <td>{{inscription.registree}}</td>
+                <td class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true" id="registrationMenu">{{inscription.matricule}}
+                    </a>
+                        <ul class="dropdown-menu registration-menu" aria-labelledby="registrationMenu" id="regist-menu">
+                            <li>
+                                <a href="{% url 'student-detail' inscription.id  %}" class="">
+                                    Dossier de l'Etudiant {{inscription.registree.first_name}} {{inscription.registree.last_name}}
+                                </a>
+                            </li>
+                            <li>
+                               
+                                  <!-- Check for permissions -->
+                                {% if user|has_role:'head_admission_service' %}
+                                <a href="" class="">
+                                    Inscription pédagogique
+                                </a>
+                                {% else %}
+                                <a class="" style="background-color: #e3e3e3; color: black;">
+                                    Inscription pédagogique
+                                </a>
+                                {% endif %}
+                            </li>
+                           
+                        </ul>
+                    
+                </td>
+                <td>{{ inscription.registree.course}}</td>
+                <td>{{ inscription.registree.course_level}}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        
+            </table>
+        
+        </div>
+        
+        <!-- Modal -->
+       
+    </div>
+</div>
+
+{% endblock %}

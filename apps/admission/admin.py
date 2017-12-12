@@ -38,11 +38,11 @@ class RegistrationAdmin(admin.ModelAdmin):
 @admin.register(Inscription)
 class AdmissionAdmin(admin.ModelAdmin):
 
-    list_display = ('matricule', 'registry', 'admission_add_date')
-    list_filter = ('matricule','registry', 'admission_add_date' )
-    date_hierarchy = 'admission_add_date'
-    ordering = ('admission_add_date', )
-    search_fields = ('matricule', 'registry')
+    list_display = ('matricule', 'registree', 'inscription_add_date')
+    list_filter = ('matricule','registree', 'inscription_add_date' )
+    date_hierarchy = 'inscription_add_date'
+    ordering = ('inscription_add_date', )
+    search_fields = ('matricule', 'registree')
 
 
 admin.site.register(AdmissionProcess)

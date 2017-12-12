@@ -50,7 +50,7 @@ class Registration(models.Model):
     registry_number = models.CharField(max_length=18, default=registration_number, unique=True, editable=False)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=6, choices=GENDER_CHOICE)
+    gender = models.CharField(max_length=16, choices=GENDER_CHOICE)
     date_of_birth = models.DateField()
     nationality = CountryField()
     fathers_name = models.CharField(max_length=100)
@@ -64,7 +64,7 @@ class Registration(models.Model):
     guardian_email = models.EmailField(max_length=100, blank=True, null=True)
     guardian_address = models.CharField(max_length=100, blank=True, null=True)
     school_origin = models.CharField(max_length=100, blank=True, null=True)
-    option = models.CharField(max_length=2, choices=OPTION_CHOICE)
+    option = models.CharField(max_length=32, choices=OPTION_CHOICE)
     year_admission_bac = models.CharField(max_length=4, blank=True, null=True)
     pv = models.CharField(max_length=10, blank=True, null=True)
     registration_add_date = models.DateTimeField(auto_now_add=True)
@@ -144,10 +144,10 @@ class AdmissionProcess(models.Model):
 
 #Define Inscription model
 class Inscription(models.Model):
-    registry = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name="reg_inscription")
+    registree = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name="reg_inscription")
     matricule = models.CharField(max_length=18, default=student_number, unique=True, editable=False)
-    admission_add_date = models.DateTimeField(auto_now_add=True)
-    admission_modify_date = models.DateTimeField(auto_now=True)
+    inscription_add_date = models.DateTimeField(auto_now_add=True)
+    inscription_modify_date = models.DateTimeField(auto_now=True)
     active_year = models.ForeignKey(ActiveAcademicYear, max_length=32, on_delete=models.CASCADE)
     user = models.ForeignKey(User)
 

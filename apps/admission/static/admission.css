@@ -217,12 +217,42 @@ form button{
 	color: red;
 }
 
-/*#id_commitee_decision_0,
-label[for="id_commitee_decision_0"]{
-	display: none;
-}*/
+/***********************************************************/
+           /*STUDENT pages STYLES*/
+/***********************************************************/
+/*Student folder detail top page*/
 
+#student-folder-nav{
+	margin-left: 25px;
+	background-color: #f5f5f5;
+}
+#student-detail-top-info{
+    margin-top: 25px;
+}
 
+.top-saisie{
+
+}
+
+.top-prenom{
+    margin-left: 65px;
+}
+
+.top-nom{
+    margin-left: 90px;
+}
+
+.top-matricule{
+    margin-left: 60px;
+}
+
+#student-folder-nav{
+	margin-bottom: 20px;
+}
+
+/***********************************************************/
+           /*STUDENT STYLES*/
+/***********************************************************/
 
 /*input:invalid {
     border-color: red;
