@@ -2,16 +2,12 @@ from django.db import models
 from apps.admission.models import Registration
 
 # Create your models here.
-# class students(models.Model):
 
-# class Students(models.Model):
-#     matricule
-#     first_name
-#     last_name
-#     gender
-#     date_of_admission
-#     fees
-#     academic_year
+class Students(models.Model):
+    registree = models.OneToOneField(Registration, on_delete=models.CASCADE, related_name='registration_student')
+
+    def __str__(self):
+        return (self.registree.reg_inscription.matricule)
 
 
 # class grades(models.Model):

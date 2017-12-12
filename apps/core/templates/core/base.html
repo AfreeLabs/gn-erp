@@ -39,7 +39,7 @@
                 </li>
                 <li><a href="{% url 'home' %}">Acceuil</a></li>
                 <li><a href="{% url 'registration' %}">Admission</a></li>
-                <li><a href="">Etudiants</a></li>
+                <li><a href="{% url 'home-student' %}">Etudiants</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInscriptionLink" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true">Inscriptions<span><b class="caret"></b></span>
                     </a>
@@ -118,6 +118,7 @@
   <script src="{% static 'js/bootstrap-dropdownhover.min.js' %}"></script>
   <script src="{% static 'js/bootstrap-dropdownhover.min.js' %}"></script>
   <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+   <script src="{% static 'js/datepicker-fr.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
 	{% block bottom %}{% endblock %}
 </body>
