@@ -13,3 +13,4 @@ def student_folder(request, id):
     student = Inscription.objects.get(id=id)
     context = {'student': student}
     return render(request, 'students/student-folder.html', context)
+
