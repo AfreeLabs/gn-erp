@@ -39,17 +39,18 @@
                   </a>
                 </li>
                 <li><a href="{% url 'home' %}">Acceuil</a></li>
-                <li><a href="{% url 'registration' %}">Admission</a></li>
+                <li><a href="{% url 'registration' %}">Admissions</a></li>
                 <li><a href="{% url 'home-student' %}">Etudiants</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInscriptionLink" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true">Inscriptions<span><b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownInscriptionLink" id="inscription-menu">
-                        <li><a href="">Inscription Administrative</a></li>
+                        <li><a href="{% url 'admission-process' %}">Inscription Administrative</a></li>
                         <li class="divider"></li>
-                    <li><a href="{% url 'logout' %}">Inscription Peagogique</a></li>
+                    <li><a href="">Inscription Peagogique</a></li>
                     </ul>
                 </li>
+                 <li><a href="">Statistiques</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConfigLink" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true">Configurations<span><b class="caret"></b></span>
                     </a>
@@ -60,7 +61,7 @@
                           <li class="divider"></li>
                           <li><a href="">Gérer les Departements</a></li>
                           <li class="divider"></li>
-                          <li><a href="">Gérer les cours</a></li>
+                          <li><a href="">Gérer les formationss</a></li>
                           <li class="divider"></li>
                           <li><a href="">Gérer les classes</a></li>
                           <li class="divider"></li>
@@ -68,20 +69,20 @@
                           <li class="divider"></li>
                         </div>
                         <div class="col-md-5">
-                          <li><a href="">Gérer les enseignant</a></li>
+                          <li><a href="">Gérer les enseignants</a></li>
                            <li class="divider"></li>
                           <li><a href="">Gérer les paiements</a></li>
                           <li class="divider"></li>
                           <li><a href="">Gérer les evaluations</a></li>
                           <li class="divider"></li>
-                          <li><a href="">Gérer les années Academique</a></li>
+                          <li><a href="">Gérer les niveaux d'enseignements</a></li>
                           <li class="divider"></li>
                           <li><a href="">Gérer des Utilisateurs</a></li>
                         </div>
                     </ul>
                  </li>
               </ul>
-              {% if not hide_search %}
+              <!-- {% if not hide_search %}
                 <form class="navbar-form navbar-left nav-search"  role="search" action="">
                   <div class="input-group" style="width:210px">
                     <input type="text" class="form-control" name="q" placeholder="Search">
@@ -89,7 +90,7 @@
                       <button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search search-icon"></span></button>
                     </span>
                   </div>
-                </form>
+                </form> -->
               {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown">

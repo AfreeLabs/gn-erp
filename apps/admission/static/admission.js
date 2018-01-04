@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
   } );
 
   // Add datatable to registration page
-  $('#registration-table').DataTable(
+  $('#registration-table, #inscription-table, #student-table').DataTable(
       {
         "language": {
           "sProcessing":     "Traitement en cours...",

@@ -149,7 +149,7 @@ def new_inscription(request, id):
             form.save()
             return redirect('admission-process')
     else:
-        form = InscriptionForm(initial={'registry': registree, 'active_year': active_year})
+        form = InscriptionForm(initial={'registree': registree, 'active_year': active_year})
     context = {'form': form, 'registration':registration, 'reg_payement': reg_payement}
     return render(request, 'admission/new-inscription.html', context)
 
